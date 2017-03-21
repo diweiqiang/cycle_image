@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #banner{
+            width:500px;
+            height:300px;
+            margin:20px auto;
+            position: relative;
+        }
+        .pic{
+            width:500px;
+            height:300px;
+            overflow: hidden;
+        }
+        #banner img{
+            display: none;
+        }
+        a{
+            text-decoration: none;
+            font-size: 60px;
+            text-align: center;
+            line-height: 55px;
+        }
+        #left{
+            position:absolute;
+            left:-60px;
+            top:40%;
+            width:60px;
+            height:60px;
+            border-radius: 30px;
+            background: lightblue;
+        }
+        #right{
+            position:absolute;
+            right:-60px;
+            top:40%;
+            width:60px;
+            height:60px;
+            border-radius: 30px;
+            background: lightblue;
+        }
+    </style>
+</head>
+<body>
+<div id="banner">
+    <div class="pic">
+        <img src="image/500x300_1.jpg" style="display: block;">
+        <img src="image/500x300_2.jpg">
+        <img src="image/500x300_3.jpg">
+        <img src="image/500x300_4.jpg">
+        <img src="image/500x300_5.jpg">
+        <img src="image/500x300_6.jpg">
+    </div>
+    <a href="javascript:;" id="left" style="display: inline-block">&lt;</a>
+    <a href="javascript:;" id="right" style="display: inline-block">&gt;</a>
+</div>
+
+<script src="jquery-3.1.0.js"></script>
+<script>
+    var index=0;
+
+    $('#right').click(function () {
+        index++;
+        if(index>5){
+            index=0;
+        }
+        $('.pic img').eq(index).fadeIn().siblings().fadeOut();
+    });
+
+    $('#left').click(function () {
+        index--;
+        if(index<0){
+            index=5;
+        }
+        $('.pic img').eq(index).fadeIn().siblings().fadeOut();
+    });
+    
+    setInterval(function () {
+        if(index<5){
+            $('.pic img').eq(index).fadeOut(1000).next().fadeIn(2000);
+            index++;
+            index%=6;
+        }else {
+            $('.pic img').eq(index).fadeOut(1000);
+            $('.pic img').eq(0).fadeIn(1000);
+            index++;
+            index%=6;
+        }
+        /*index++;
+        index%=6;
+        $('.pic img').eq(index).fadeIn(2200).siblings().fadeOut(1000);*/
+    },3000);
+</script>
+</body>
+</html>
